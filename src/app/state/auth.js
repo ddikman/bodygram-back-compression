@@ -4,19 +4,14 @@ import React, { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children}) => {
-
-  const [email, setEmail] = useState(null)
-
-  useEffect(() => {
-    setEmail(sessionStorage.getItem('email'))
-  }, [])
+  const [email, setEmail] = useState(localStorage ? localStorage.getItem('email') : null)
 
   useEffect(() => {
     console.log('email is updated to', email)
     if (!email || email === '') {
-      sessionStorage.removeItem('email')
+      localStorage.removeItem('email')
     } else {
-      sessionStorage.setItem('email', email)
+      localStorage.setItem('email', email)
     }
   }, [email])
 

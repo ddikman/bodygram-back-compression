@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useContext } from "react"
+import { useCallback, useContext, useRef } from "react"
 import { AuthContext } from "../state/auth"
 import RequireLogin from "../components/requireLogin"
 
@@ -15,6 +15,8 @@ export default function AddScan() {
 
   const [scannerUrl, setScannerUrl] = useState(null)
   const [customId, setCustomId] = useState(null)
+
+  // const [frameRef, setFrameRef] = useState(null)
 
   const router = useRouter()
 
@@ -54,9 +56,31 @@ export default function AddScan() {
     }
   }, [handleCloseMessage])
 
+  // useEffect(() => {
+  //   console.log('iframeref updated', frameRef)
+  //   if (frameRef) {
+  //     const observer = new MutationObserver((mutations) => {
+  //       const detect = frameRef.contentWindow.document.querySelector('#detect')
+  //       if (detect) {
+  //         console.log('detect found')
+  //       }
+  //     })
+
+  //     // hack to allow the iframe to load before we start observing
+  //     setTimeout(() => {
+  //       observer.observe(frameRef.contentWindow.document, { childList: true, subtree: true })
+  //     }, 1500)
+
+  //     return () => {
+  //       observer.disconnect()
+  //     }
+  //   }
+  // }, [frameRef])
+
   return <RequireLogin>
     { state === 'loadToken' && <div>Loading..</div>}
     { state === 'runScan' && <iframe
+            ref={setFrameRef}
             width='100%'
             height="100%"
             src={scannerUrl}

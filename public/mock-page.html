@@ -10,6 +10,13 @@
         console.log('sending message')
         window.parent.postMessage({ type: 0 }, '*');
       });
+
+      setTimeout(() => {
+        const child = document.createElement('div')
+        child.id = "detect"
+        child.innerHTML = 'This is a new element';
+        document.body.append(child)
+      }, 3000)
     </script>
   </body>
 </html>
