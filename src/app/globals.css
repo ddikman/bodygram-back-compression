@@ -3,19 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground: #18478e;
+  --foreground-light: #4372b9;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--foreground);
 }
 
 
@@ -29,12 +21,26 @@ body {
 
 .button, button, input[type="submit"] {
   padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid rgb(var(--foreground-rgb));
-  background: blue;
+  border-radius: 2.0rem;
+
+  border: 1px solid var(--foreground);
+  background: var(--foreground);
   color: white;
+  box-shadow: 0px 0.25rem #071428;
+
   display: flex;
   justify-content: center;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover, button:hover, input[type="submit"]:hover {
+  background: var(--foreground-light);
+}
+
+.button:active, button:active, input[type="submit"]:active {
+  transform: translateY(0.25rem);
+  box-shadow: none;
 }
 
 input[type="email"] {

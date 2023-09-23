@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import RequireLogin from "../components/requireLogin";
 import useApi from "../hooks/useApi";
 import CompressionView from "../components/compressionView";
+import Loader from "../components/loader";
 
 export default function Home() {
   const [ loading, setLoading ] = useState(true)
@@ -26,13 +27,13 @@ export default function Home() {
 
   return <RequireLogin>
     <div>
-      Home
-      { loading && <div>Loading...</div> }
+      <h1 class="pageTitle">Your back now</h1>
+      { loading && <Loader /> }
       { recentWeek && recentWeek.hasEntries &&
-        <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="Recent Week" />
+        <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="This recent week" />
       }
       { !loading && <div>
-        <button onClick={() => router.push('/compare')}>Compare with before</button>
+        <button className="w-full mt-4" onClick={() => router.push('/compare')}>Compare with before</button>
       </div>}
     </div>
   </RequireLogin>

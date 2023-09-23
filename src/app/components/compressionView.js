@@ -69,7 +69,7 @@ export default function CompressionView({title, shoulderAngle, hipAngle, backHei
 
   return (<div>
       <h2>{title}</h2>
-      <div className={styles.container}>
+    <div className={styles.container}>
         <canvas style={{ width: '100%' }} ref={canvasRef}></canvas>
       </div>
   </div>)
