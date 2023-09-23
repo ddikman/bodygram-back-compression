@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
-import { createClient } from '@supabase/supabase-js'
 import BodygramClient from "../bodygramClient";
+import supabase from "../supabase";
+import { headers } from "next/headers";
 
-export async function GET(req) {
+export async function POST(req) {
 
-  const client = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
-
-  const email = req.headers['x-email']
-  const { data } = await client.from('scans').insert({
+  const email = headers().get('x-email')
+  console.log(`Got request to create scanner url for ${email}`)
+  const { data } = await supabase.from('scans').insert({
     email: email,
-    data: JSON.stringify({
+    data: {
       'status': 'pending'
-    })
+    }
   }).select()
 
 

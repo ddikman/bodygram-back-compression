@@ -1,11 +1,16 @@
-import { redirect } from 'next/navigation'
-import { useContext } from "react"
+import { redirect, useRouter } from 'next/navigation'
+import { useContext, useEffect } from "react"
 import { AuthContext } from "../state/auth"
 
 export default function RequireLogin({children}) {
   const { isLoggedIn } = useContext(AuthContext)
-  if (!isLoggedIn) {
-    redirect('/')
-  }
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+     router.replace('/')
+    }
+  }, [isLoggedIn, router])
+
   return children
 }

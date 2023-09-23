@@ -1,17 +1,16 @@
 'use client'
 
-import { useCallback, useContext, useRef } from "react"
-import { AuthContext } from "../state/auth"
+import { useCallback } from "react"
 import RequireLogin from "../components/requireLogin"
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from "next/navigation"
-import api from '@/app/services/apiClient';
 import Link from "next/link"
+import useApi from "../hooks/useApi"
 
 
 export default function AddScan() {
-  const { email } = useContext(AuthContext)
+  const api = useApi()
   const [state, setState] = useState('loadToken')
 
   const [scannerUrl, setScannerUrl] = useState(null)
@@ -22,11 +21,11 @@ export default function AddScan() {
   const router = useRouter()
 
   const loadToken = useCallback(async () => {
-    const { scannerUrl, customId } = await api.getScannerUrl(email)
+    const { scannerUrl, customId } = await api.createScannerUrl()
     setScannerUrl(scannerUrl)
     setCustomId(customId)
     setState('runScan')
-  }, [email])
+  }, [api])
 
   useEffect(() => {
     loadToken()
@@ -36,14 +35,14 @@ export default function AddScan() {
   const saveScan = useCallback(async () => {
     setState('saveScan')
     try {
-      await api.uploadScan(customId, email);
+      await api.uploadScan(customId);
       router.push('/home')
     } catch (e) {
       console.error(e)
       setState('error')
     }
 
-  }, [customId, email, router])
+  }, [customId, api, router])
 
   const handleCloseMessage = useCallback((event) => {
     const { type } = event.data

@@ -1,24 +1,41 @@
-class ApiClient {
-  getScannerUrl = async (email) => {
-    const json = await fetch(`/api/token`, {
+
+export class ApiClient {
+  constructor(email) {
+    this.email = email
+  }
+
+  createScannerUrl = async () => {
+    const json = await fetch(`/api/tokens`, {
+      method: 'POST',
       headers: {
-        'x-email': email
+        'x-email': this.email
       }
     }).then((response) => response.json());
     return { scannerUrl: json.scannerUrl, customId: json.customId }
   }
 
-  uploadScan = async (customId, email) => {
-    await fetch(`/api/scan`, {
+  uploadScan = async (customId) => {
+    await fetch(`/api/scans`, {
       method: 'POST',
       body: JSON.stringify({
-        email: email,
+        email: this.email,
         customId: customId
       })
     }).then((response) => response.json());
   }
+
+  getRecentWeek = async () => {
+    const json = await fetch(`/api/scans/recent`, {
+    headers: {
+        'x-email': this.email
+      }
+    }).then((response) => response.json());
+
+    return {
+      backHeight: json.backHeight,
+      shoulder: json.shoulder,
+      hip: json.hip,
+      hasEntries: json.hasEntries
+    }
+  }
 }
-
-const apiClient = new ApiClient();
-
-export default apiClient;

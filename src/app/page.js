@@ -14,7 +14,7 @@ export default function Home() {
       <p>
         You can also use it before and after shorter periods of time to see how your back reacts to stressful activities.
       </p>
-      <Link class="button" href="/sign-in">Start tracking!</Link>
+      <Link className="button" href="/sign-in">Start tracking!</Link>
     </div>
   )
 }
