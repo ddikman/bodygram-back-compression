@@ -5,8 +5,9 @@ import { AuthContext } from "../state/auth"
 import RequireLogin from "../components/requireLogin"
 
 import React, { useState, useEffect } from 'react'
-import { getScannerUrl, uploadScan } from '@/app/services/bodygram';
 import { useRouter } from "next/navigation"
+import api from '@/app/services/apiClient';
+import Link from "next/link"
 
 
 export default function AddScan() {
@@ -21,7 +22,7 @@ export default function AddScan() {
   const router = useRouter()
 
   const loadToken = useCallback(async () => {
-    const { scannerUrl, customId } = await getScannerUrl(email)
+    const { scannerUrl, customId } = await api.getScannerUrl(email)
     setScannerUrl(scannerUrl)
     setCustomId(customId)
     setState('runScan')
@@ -34,8 +35,14 @@ export default function AddScan() {
 
   const saveScan = useCallback(async () => {
     setState('saveScan')
-    await uploadScan(customId, email);
-    router.push('/home')
+    try {
+      await api.uploadScan(customId, email);
+      router.push('/home')
+    } catch (e) {
+      console.error(e)
+      setState('error')
+    }
+
   }, [customId, email, router])
 
   const handleCloseMessage = useCallback((event) => {
@@ -80,13 +87,19 @@ export default function AddScan() {
   return <RequireLogin>
     { state === 'loadToken' && <div>Loading..</div>}
     { state === 'runScan' && <iframe
-            ref={setFrameRef}
-            width='100%'
-            height="100%"
+            // ref={setFrameRef}
+            style={{ height: '80vh', width: '100%' }}
             src={scannerUrl}
             // src="/mock-page.html"
             allow="camera; microphone; accelerometer; magnetometer; gyroscope"
     />}
     { state === 'saveScan' && <div>Saving scan..</div> }
+    { state === 'error' && <div>
+      <p>
+        There was an error saving your scan. Please try again.
+      </p>
+      <button onClick={() => window.location.reload()}>Retry</button>
+      <Link href="/home">Return to main screen</Link>
+    </div> }
   </RequireLogin>
 }

@@ -21,10 +21,34 @@ body {
 
 /** App styling **/
 
-button {
+.button, button, input[type="submit"] {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   border: 1px solid rgb(var(--foreground-rgb));
   background: blue;
   color: white;
+  display: flex;
+  justify-content: center;
+}
+
+input[type="email"] {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(var(--foreground-rgb));
+}
+
+a:not(.button) {
+  color: blue;
+  text-decoration: underline;
+}
+
+main {
+  margin: 0 auto;
+  width: min(100vw, 600px);
+  height: 100px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
