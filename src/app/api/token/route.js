@@ -17,7 +17,6 @@ export async function GET(req) {
     })
   }).then((response) => response.json());
 
-  console.log('response', json)
   return NextResponse.json({
     token: json.token,
     scannerUrl: `https://platform.bodygram.com/en/${orgId}/scan?token=${json.token}&system=metric`
