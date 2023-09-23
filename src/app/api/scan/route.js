@@ -21,7 +21,7 @@ export async function POST(req) {
   const client = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   const { error, status } = await client.from('scans').update({
     email: email,
-    data: JSON.stringify(data)
+    data: data
   }).eq('id', customId)
 
   if (error) {
