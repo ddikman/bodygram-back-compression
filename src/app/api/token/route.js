@@ -1,24 +1,29 @@
 import { NextResponse } from "next/server";
-
-const orgId = process.env.ORG_ID;
-const apiKey = process.env.API_KEY;
+import { createClient } from '@supabase/supabase-js'
+import BodygramClient from "../bodygramClient";
 
 export async function GET(req) {
-  const url = `https://platform.bodygram.com/api/orgs/${orgId}/scan-tokens`
-  const json = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': apiKey
-    },
-    body: JSON.stringify({
-      'scope': [
-        'api.platform.bodygram.com/scans:create'
-      ]
+
+  const client = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+
+  const email = req.headers['x-email']
+  const { data } = await client.from('scans').insert({
+    email: email,
+    data: JSON.stringify({
+      'status': 'pending'
     })
-  }).then((response) => response.json());
+  }).select()
+
+
+  const customId = data[0].id
+
+  const bodyGramClient = new BodygramClient()
+  const token = await bodyGramClient.getToken(customId)
+  const scanUrl = bodyGramClient.getScanUrl(token)
 
   return NextResponse.json({
-    token: json.token,
-    scannerUrl: `https://platform.bodygram.com/en/${orgId}/scan?token=${json.token}&system=metric`
+    token: token,
+    customId: customId,
+    scannerUrl: scanUrl
   })
 }

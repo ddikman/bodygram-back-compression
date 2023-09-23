@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <h1>Mock Page</h1>
+    <p>This is a mock page.</p>
+    <button id="closeButton" click="close()">
+      Close it
+    </button>
+    <script>
+      document.getElementById('closeButton').addEventListener('click', () => {
+        console.log('sending message')
+        window.parent.postMessage({ type: 0 }, '*');
+      });
+    </script>
+  </body>
+</html>
