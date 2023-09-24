@@ -22,9 +22,9 @@ export default function Home() {
       setRecentWeek(recentWeek)
       setLoading(false)
 
-      if (!recentWeek.hasEntries) {
-        router.push('/first-scan')
-      }
+      // if (!recentWeek.hasEntries) {
+      //   router.push('/first-scan')
+      // }
     })
   }, [api, router])
 
@@ -32,8 +32,14 @@ export default function Home() {
     <div>
       <h1 class="pageTitle">Your back now</h1>
       { loading && <Loader /> }
-      { recentWeek && recentWeek.hasEntries &&
-        <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="This recent week" />
+      { recentWeek && recentWeek.hasEntries && <div>
+          <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="This recent week" />
+          <div className="flex flex-col">
+            <span>Shoulder angle: {recentWeek.shoulder}°</span>
+            <span>Hip angle: {recentWeek.hip}°</span>
+            <span>Back height: {recentWeek.backHeight / 10.0}cm</span>
+          </div>
+        </div>
       }
       { !loading && <div className="flex flex-col gap-4">
         <button className="w-full mt-4" onClick={() => router.push('/compare')}>Compare with before</button>

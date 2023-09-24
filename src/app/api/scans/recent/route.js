@@ -50,10 +50,16 @@ export async function GET(req) {
     })
   }
 
+  const getAverage = (values) => {
+    const total = values.reduce((acc, value) => acc + value, 0) / values.length
+    return Math.round(total * 100) / 100;
+  }
+
+
   const averages = {
-    backHeight: scans.reduce((acc, scan) => acc + scan.backHeight, 0) / scans.length,
-    shoulder: scans.reduce((acc, scan) => acc + scan.posture.shoulder, 0) / scans.length,
-    hip: scans.reduce((acc, scan) => acc + scan.posture.hip, 0) / scans.length,
+    backHeight: getAverage(scans.map((scan) => scan.backHeight)),
+    shoulder: getAverage(scans.map((scan) => scan.posture.shoulder)),
+    hip: getAverage(scans.map((scan) => scan.posture.hip)),
     hasEntries: true
   }
 

@@ -58,6 +58,7 @@ main {
   margin: 0 auto;
   width: min(100vw, 600px);
   padding: 1rem;
+  padding-top: 3rem;
 }
 
 h1 {

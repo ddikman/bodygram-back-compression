@@ -41,7 +41,7 @@ function PeriodView({ title, shoulderAngle, hipAngle, backHeight }) {
     <div className="flex flex-col">
       <span>Shoulder angle: {shoulderAngle}°</span>
       <span>Hip angle: {hipAngle}°</span>
-      <span>Back height: {backHeight / 100.0}cm</span>
+      <span>Back height: {backHeight / 10.0}cm</span>
     </div>
   </div>
 }
