@@ -17,10 +17,11 @@ export default function Home() {
       <div style={{paddingTop: '4rem'}}>
         <Link className="button" href="/sign-in">Start tracking!</Link>
       </div>
+      <a className='link' style={{ display: 'block', marginTop: '3rem', fontSize: '0.75rem', textAlign: 'center' }} href="https://github.com/ddikman/straighten">Check this repo on GitHub</a>
     </div>
   )
 }
 
 function Decoration() {
-  return <div style={{ backgroundImage: 'url(/curve.png)', backgroundSize: 'cover', left: '0', right: '0', bottom: '-120px', mixBlendMode: 'multiply', display: 'block', height: '400px', position: 'absolute' }}></div>
+  return <div style={{ zIndex: '-100', backgroundImage: 'url(/curve.png)', backgroundSize: 'cover', left: '0', right: '0', bottom: '-120px', mixBlendMode: 'multiply', display: 'block', height: '400px', position: 'absolute' }}></div>
 }
