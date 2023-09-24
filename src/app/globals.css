@@ -49,7 +49,7 @@ input[type="email"] {
   border: 1px solid rgb(var(--foreground-rgb));
 }
 
-a:not(.button) {
+a:not(.button), span.link {
   color: blue;
   text-decoration: underline;
 }

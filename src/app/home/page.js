@@ -1,13 +1,16 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequireLogin from "../components/requireLogin";
 import useApi from "../hooks/useApi";
 import CompressionView from "../components/compressionView";
 import Loader from "../components/loader";
+import Link from "next/link";
+import { AuthContext } from "../state/auth";
 
 export default function Home() {
+  const { logout } = useContext(AuthContext);
   const [ loading, setLoading ] = useState(true)
   const api = useApi()
   const router = useRouter()
@@ -32,8 +35,9 @@ export default function Home() {
       { recentWeek && recentWeek.hasEntries &&
         <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="This recent week" />
       }
-      { !loading && <div>
+      { !loading && <div className="flex flex-col gap-4">
         <button className="w-full mt-4" onClick={() => router.push('/compare')}>Compare with before</button>
+        <span class="link" onClick={logout}>Logout</span>
       </div>}
     </div>
   </RequireLogin>

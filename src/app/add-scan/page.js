@@ -46,8 +46,7 @@ export default function AddScan() {
 
   const handleCloseMessage = useCallback((event) => {
     const { type } = event.data
-    console.log('got message, type = ' + type)
-    console.log('state is ' + state)
+    console.log('got message', event.data)
     if(type === 0) {
       if (state === 'runScan') {
         saveScan()
