@@ -38,4 +38,10 @@ export class ApiClient {
       hasEntries: json.hasEntries
     }
   }
+
+  getAverages = async () => {
+    const response = await fetch('/api/scans/averages').then((response) => response.json());
+    console.log('averages', response)
+    return response
+  }
 }
