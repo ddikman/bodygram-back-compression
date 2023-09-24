@@ -20,8 +20,6 @@ const data = [
   { month: 'Dec', hip: 3.2, shoulder: 2.6, back: 44.0 },
 ];
 
-
-
 export default function Trend() {
   const router = useRouter()
   return <RequireLogin>

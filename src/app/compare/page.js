@@ -29,7 +29,7 @@ export default function Compare() {
           To home
         </button>
         <button className="secondary w-full">
-          Change period
+          Change period (coming)
         </button>
       </div>
     </div>
