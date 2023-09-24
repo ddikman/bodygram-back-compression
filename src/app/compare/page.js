@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import CompressionView from "../components/compressionView"
 import RequireLogin from "../components/requireLogin"
+import Measures from "../components/measures"
 
 export default function Compare() {
   const router = useRouter()
@@ -16,10 +17,10 @@ export default function Compare() {
     </div>
 
     <div className="mt-4">
-      Your back has straightened by 1.00cm, that is amazing, good job!
+      Your back has straightened by <em>1.00cm</em>, that is <em>amazing</em>, good job!
     </div>
     <div className="mt-4">
-      The difference in shoulder angle has decreased by -2.1° and your hip angle has decreased by -2.9°.
+      The difference in shoulder angle has decreased by <em>-2.1°</em> and your hip angle has decreased by <em>-2.9°</em>.
     </div>
 
     <div className="mt-4">
@@ -37,11 +38,7 @@ export default function Compare() {
 
 function PeriodView({ title, shoulderAngle, hipAngle, backHeight }) {
   return <div className="flex flex-col gap-2">
-    <CompressionView title={title} shoulderAngle={shoulderAngle} backHeight={backHeight} hipAngle={hipAngle} />
-    <div className="flex flex-col">
-      <span>Shoulder angle: {shoulderAngle}°</span>
-      <span>Hip angle: {hipAngle}°</span>
-      <span>Back height: {backHeight / 10.0}cm</span>
-    </div>
+    <CompressionView direction='row' title={title} shoulderAngle={shoulderAngle} backHeight={backHeight} hipAngle={hipAngle} />
+    <Measures direction="col" style={{fontSize: '0.5rem'}} shoulder={shoulderAngle} hip={hipAngle} back={backHeight} />
   </div>
 }

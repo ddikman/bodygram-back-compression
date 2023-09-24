@@ -8,6 +8,7 @@ import CompressionView from "../components/compressionView";
 import Loader from "../components/loader";
 import Link from "next/link";
 import { AuthContext } from "../state/auth";
+import Measures from "../components/measures";
 
 export default function Home() {
   const { logout } = useContext(AuthContext);
@@ -21,10 +22,6 @@ export default function Home() {
     api.getRecentWeek().then((recentWeek) => {
       setRecentWeek(recentWeek)
       setLoading(false)
-
-      // if (!recentWeek.hasEntries) {
-      //   router.push('/first-scan')
-      // }
     })
   }, [api, router])
 
@@ -34,16 +31,20 @@ export default function Home() {
       { loading && <Loader /> }
       { recentWeek && recentWeek.hasEntries && <div>
           <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="The past seven days" />
-          <div className="flex flex-col">
-            <span>Shoulder angle: {recentWeek.shoulder}°</span>
-            <span>Hip angle: {recentWeek.hip}°</span>
-            <span>Back height: {recentWeek.backHeight / 10.0}cm</span>
-          </div>
+          <Measures direction="row" shoulder={recentWeek.shoulder} hip={recentWeek.hip} back={recentWeek.backHeight} />
         </div>
       }
+      { recentWeek && recentWeek.hasEntries === false && <div>
+        <p>
+          Welcome to <em>Straighten</em>.
+        </p>
+        <p className="mt-2">
+          To get started, add your first scan by clicking the button below.
+        </p>
+      </div>}
       { !loading && <div className="flex flex-col gap-4 justify-center mt-4">
         <button className="w-full" onClick={() => router.push('/add-scan')}>Add scan</button>
-        <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare dates</button>
+        { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare dates</button> }
         <span className="link w-full text-center" onClick={logout}>Logout</span>
       </div>}
     </div>

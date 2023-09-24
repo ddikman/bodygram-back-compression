@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import useApi from "../hooks/useApi"
+import Loader from "../components/loader"
 
 
 export default function AddScan() {
@@ -61,19 +62,27 @@ export default function AddScan() {
   }, [handleCloseMessage])
 
   return <RequireLogin>
-    { state === 'loadToken' && <div>Loading..</div>}
+    { state === 'loadToken' && <div>
+      <h1>Hold on</h1>
+      <Loader />
+      </div>}
     { state === 'runScan' && <iframe
             style={{ height: '80vh', width: '100%' }}
             src={scannerUrl}
             allow="camera; microphone; accelerometer; magnetometer; gyroscope"
     />}
-    { state === 'saveScan' && <div>Saving scan..</div> }
-    { state === 'error' && <div>
-      <p>
+    { state === 'saveScan' && <div>
+      <h1>Hold on</h1>
+      <p>Saving scan..</p>
+      <Loader />
+    </div> }
+    { state === 'error' && <div className="flex flex-col gap-4 justify-center">
+      <h1>Error</h1>
+      <p className="mb-4">
         There was an error saving your scan. Please try again.
       </p>
-      <button onClick={() => window.location.reload()}>Retry</button>
-      <Link href="/home">Return to main screen</Link>
+      <button className="w-full" onClick={() => window.location.reload()}>Retry</button>
+      <Link className="w-full text-center" href="/home">Return to main screen</Link>
     </div> }
   </RequireLogin>
 }
