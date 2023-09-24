@@ -37,7 +37,10 @@ export default function Home() {
       }
       { !loading && <div className="flex flex-col gap-4">
         <button className="w-full mt-4" onClick={() => router.push('/compare')}>Compare with before</button>
+        <div className="flex flex-row gap-2 w-full justify-between">
+        <Link href='/add-scan'>Add new scan</Link>
         <span class="link" onClick={logout}>Logout</span>
+        </div>
       </div>}
     </div>
   </RequireLogin>
