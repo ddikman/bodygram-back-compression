@@ -8,6 +8,10 @@ You can try the app over at https://straighten.vercel.app
 
 For more detailed information, check out [the slides](https://speakerdeck.com/ddikman/hackathon-app-idea).
 
+**Please note:**
+
+Unfortunately, the idea I had for creating this app together with Bodygram's APIs didn't pan out. It turns out that the shoulder and hip angles are straight even for some suffering from scholiois. The slides above gives more information and some ideas of other ways to work around this. Regardless, this repo can act as a PoC idea of how an app like it would work.
+
 ## Running the app
 
 The app uses [Bodygram's](https://bodygram.com/en/) body scanning platform to capture posture data. It stores this in a Supabase database.
