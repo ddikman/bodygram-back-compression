@@ -45,6 +45,7 @@ export default function Home() {
       { !loading && <div className="flex flex-col gap-4 justify-center mt-4">
         <button className="w-full" onClick={() => router.push('/add-scan')}>Add scan</button>
         { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare dates</button> }
+        { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/trend')}>Show trend</button> }
         <span className="link w-full text-center" onClick={logout}>Logout</span>
       </div>}
     </div>
