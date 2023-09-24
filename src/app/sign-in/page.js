@@ -17,13 +17,17 @@ export default function SignIn() {
   }
 
   return (<div>
-      <h2>Set your email</h2>
+      <h1>Sign In</h1>
+      <p className="my-4">
+        Note: <br/>
+        This app is just a prototype. Your email acts as a way to identify you but it is in no way secure.
+      </p>
       <form onSubmit={onSubmit}>
         <label>
-          Email
+          Your email:
         </label>
-        <input type="email" onChange={(e) => setLoginEmail(e.target.value)} />
-        <input type="submit" value="Start" />
+        <input className="w-full" type="email" onChange={(e) => setLoginEmail(e.target.value)} />
+        <input className="my-4 w-full" type="submit" value="Continue" />
       </form>
     </div>
   )

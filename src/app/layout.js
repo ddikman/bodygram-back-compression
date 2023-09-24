@@ -6,7 +6,7 @@ import { AuthProvider } from './state/auth'
 import NoSsr from './components/noSsr'
 import Div100vh from 'react-div-100vh'
 
-const poppins = Poppins({ subsets: ['latin'], weight: '400' })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'] })
 
 export default function RootLayout({ children }) {
   return (

@@ -4,17 +4,18 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className='flex flex-col justify-center'>
-      <h1>Welcome</h1>
-      <p>
-        Straighten is an app to help you track your back compression over time.
-      </p>
-      <p>
-        By scanning your body on a regular basis, you can see how your posture changes over time.
-      </p>
-      <p>
-        You can also use it before and after shorter periods of time to see how your back reacts to stressful activities.
-      </p>
-      <Link className="button" href="/sign-in">Start tracking!</Link>
+      <h1>Straighten</h1>
+      <div className='flex flex-col gap-4'>
+        <span><em>Straighten</em> helps you monitor and manage your back curvature.</span>
+        <ul>
+          <li>Scan your body regularly</li>
+          <li>Compare before/after stressful activities</li>
+          <li>Track changes over time</li>
+        </ul>
+      </div>
+      <div className='py-4'>
+        <Link className="button" href="/sign-in">Start tracking!</Link>
+      </div>
     </div>
   )
 }

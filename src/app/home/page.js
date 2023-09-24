@@ -30,10 +30,10 @@ export default function Home() {
 
   return <RequireLogin>
     <div>
-      <h1 class="pageTitle">Your back now</h1>
+      <h1 class="pageTitle">Your Curve</h1>
       { loading && <Loader /> }
       { recentWeek && recentWeek.hasEntries && <div>
-          <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="This recent week" />
+          <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="The past seven days" />
           <div className="flex flex-col">
             <span>Shoulder angle: {recentWeek.shoulder}°</span>
             <span>Hip angle: {recentWeek.hip}°</span>
@@ -41,12 +41,10 @@ export default function Home() {
           </div>
         </div>
       }
-      { !loading && <div className="flex flex-col gap-4">
-        <button className="w-full mt-4" onClick={() => router.push('/compare')}>Compare with before</button>
-        <div className="flex flex-row gap-2 w-full justify-between">
-        <Link href='/add-scan'>Add new scan</Link>
-        <span class="link" onClick={logout}>Logout</span>
-        </div>
+      { !loading && <div className="flex flex-col gap-4 justify-center mt-4">
+        <button className="w-full" onClick={() => router.push('/add-scan')}>Add scan</button>
+        <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare dates</button>
+        <span className="link w-full text-center" onClick={logout}>Logout</span>
       </div>}
     </div>
   </RequireLogin>

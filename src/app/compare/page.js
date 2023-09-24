@@ -11,8 +11,8 @@ export default function Compare() {
     <h1>Compare</h1>
 
     <div className="flex flex-row gap-2">
-      <PeriodView shoulderAngle={2.3} backHeight={4500} hipAngle={3.4} title="Last week" />
-      <PeriodView shoulderAngle={0.2} backHeight={4600} hipAngle={0.5} title="This week" />
+      <PeriodView shoulderAngle={2.3} backHeight={455} hipAngle={3.4} title="Last week" />
+      <PeriodView shoulderAngle={0.2} backHeight={460} hipAngle={0.5} title="This week" />
     </div>
 
     <div className="mt-4">
@@ -23,12 +23,12 @@ export default function Compare() {
     </div>
 
     <div className="mt-4">
-      <div className="flex flex-row gap-2 justify-stretch">
-        <button className="secondary w-full">
-          Change period
-        </button>
+      <div className="flex flex-col gap-4 justify-stretch">
         <button onClick={() => router.push('/home')} className="w-full">
           To home
+        </button>
+        <button className="secondary w-full">
+          Change period
         </button>
       </div>
     </div>

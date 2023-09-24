@@ -4,7 +4,8 @@
 
 :root {
   --foreground: #18478e;
-  --foreground-light: #4372b9;
+  --foreground-light: #3e6db3;
+  --text-light: #fff;
 }
 body {
   color: var(--foreground);
@@ -25,7 +26,7 @@ body {
 
   border: 1px solid var(--foreground);
   background: var(--foreground);
-  color: white;
+  color: var(--text-light);
   box-shadow: 0px 0.25rem #071428;
 
   display: flex;
@@ -43,6 +44,15 @@ body {
   box-shadow: none;
 }
 
+.secondary {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.secondary:hover {
+  color: white;
+}
+
 input[type="email"] {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
@@ -51,7 +61,8 @@ input[type="email"] {
 
 a:not(.button), span.link {
   color: blue;
-  text-decoration: underline;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 main {
@@ -61,7 +72,27 @@ main {
   padding-top: 3rem;
 }
 
+em {
+  font-style: normal;
+  font-weight: 700;
+  background: linear-gradient(45deg, #18478e, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+ul li {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--foreground);
 }
