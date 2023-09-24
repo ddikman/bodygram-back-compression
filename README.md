@@ -1,46 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Straighten
 
-## Getting Started
+Straighten is a way for scoliosis patients to monitor and manage their curvature over time.
 
-First, run the development server:
+You can try the app over at https://straighten.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Example screenshot](./example.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For more detailed information, check out [the slides](https://speakerdeck.com/ddikman/hackathon-app-idea).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Running the app
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The app uses [Bodygram's](https://bodygram.com/en/) body scanning platform to capture posture data. It stores this in a Supabase database.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Runnig the app
-
-To be able to scan yourself you have to access the app via a mobile phone https, otherwise the required permissions for camera and phone-specific libraries used for position detection, cannot be accessed.
-
-The easiset way to get this working is to run ngrok. Install it, authenticate and then run:
+Before running the app, you will need to add the following settings:
 
 ```shell
+export API_KEY="Your Bodygram API key"
+ORG_ID="Your Bodygram organisaion key"
+
+NEXT_PUBLIC_SUPABASE_URL="URL to your supabase instnace"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="The supbabase anonymous key"
+```
+
+## Authentication
+
+The app authentication isn't authentication as much as just splitting users for the sake of splitting users. You "log in" by giving the app an email which it will use to store your data.
+
+## Database setup
+
+Just add a single `scans` table using this SQL and you should be good to go:
+
+```sql
+CREATE TABLE IF NOT EXISTS "public"."scans" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "email" character varying,
+    "data" "json"
+);
+```
+
+## Scanning
+
+To do the scan, you have to run the app on a mobile phone. Furthermore, you have to be using https to be able to get the permissons to the camera.
+
+An easy way to get https access is to tunnel traffic to your local machine using [ngrok](https://ngrok.com/);
+
+```
 ngrok http 3000
 ```

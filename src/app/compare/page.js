@@ -8,26 +8,26 @@ export default function Compare() {
   const router = useRouter()
 
   return <RequireLogin>
-    Compare
+    <h1>Compare</h1>
 
     <div className="flex flex-row gap-2">
       <PeriodView shoulderAngle={2.3} backHeight={4500} hipAngle={3.4} title="Last week" />
       <PeriodView shoulderAngle={0.2} backHeight={4600} hipAngle={0.5} title="This week" />
     </div>
 
-    <div>
+    <div className="mt-4">
       Your back has straightened by 1.00cm, that is amazing, good job!
     </div>
-    <div>
+    <div className="mt-4">
       The difference in shoulder angle has decreased by -2.1° and your hip angle has decreased by -2.9°.
     </div>
 
-    <div>
-      <div className="flex flex-row gap-2">
-        <button className="secondary">
+    <div className="mt-4">
+      <div className="flex flex-row gap-2 justify-stretch">
+        <button className="secondary w-full">
           Change period
         </button>
-        <button onClick={() => router.push('/home')}>
+        <button onClick={() => router.push('/home')} className="w-full">
           To home
         </button>
       </div>
