@@ -4,7 +4,6 @@ import styles from './compressionView.module.css'
 
 export default function CompressionView({title, shoulderAngle, hipAngle, backHeight}) {
   const canvasRef = useRef(null);
-  const canvasRef2 = useRef('7');
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -28,9 +27,9 @@ export default function CompressionView({title, shoulderAngle, hipAngle, backHei
       ctx.lineTo(to.x - centerX, to.y - centerY);
 
       if (emphasis) {
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = '#07C9A6';
       } else {
-        ctx.strokeStyle = '#bababa';
+        ctx.strokeStyle = '#304642';
         ctx.setLineDash([10, 5]);
       }
 
@@ -59,7 +58,6 @@ export default function CompressionView({title, shoulderAngle, hipAngle, backHei
     body.src = '/body.png';
 
     body.onload = () => {
-      console.log('loading')
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.drawImage(body, 0, 0, 558 * scale, 542 * scale);
       drawLines();

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import RequireLogin from "../components/requireLogin"
 
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import PageContainer from "../components/pageContainer";
 
 const data = [
   { month: 'Jan', hip: 1.6, shoulder: 0.7, back: 45.8 },
@@ -23,8 +24,7 @@ const data = [
 export default function Trend() {
   const router = useRouter()
   return <RequireLogin>
-    <div>
-      <h1>Trend</h1>
+    <PageContainer title="Trend">
       <h2 className="mb-2">Angles (degrees)</h2>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data} margin={ { left: -32 } }>
@@ -47,6 +47,6 @@ export default function Trend() {
         </LineChart>
       </ResponsiveContainer>
       <button className="w-full mt-8" onClick={() => router.push('/home')}>Back</button>
-    </div>
+    </PageContainer>
   </RequireLogin>
 }

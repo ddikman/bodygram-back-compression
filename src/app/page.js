@@ -1,27 +1,29 @@
 'use client'
 import Link from 'next/link'
+import PageContainer from './components/pageContainer'
 
 export default function Home() {
-  return (
-    <div className='flex flex-col justify-center'>
+  return <PageContainer title="Straighten">
       <Decoration />
-      <h1>Straighten</h1>
       <div className='flex flex-col gap-4'>
-        <span><em>Straighten</em> helps you monitor and manage your back curvature.</span>
+        <span className='large'><em>Straighten</em> helps you monitor and manage your back curvature.</span>
         <ul>
           <li>Scan your body regularly</li>
           <li>Compare before/after stressful activities</li>
           <li>Track changes over time</li>
         </ul>
       </div>
-      <div style={{paddingTop: '4rem'}}>
+      <div className='flex flex-1 flex-col justify-end'>
         <Link className="button" href="/sign-in">Start tracking!</Link>
       </div>
-      <a className='link' style={{ display: 'block', marginTop: '3rem', fontSize: '0.75rem', textAlign: 'center' }} href="https://github.com/ddikman/straighten">Check this repo on GitHub</a>
-    </div>
-  )
+      <div className='meta pt-4 text-center'>
+        <p>You can find the source code for this app on <a target='_blank' href="https://github.com/ddikman/straighten">GitHub</a>.</p>
+        <p>It is made using the APIs provided by <a target='_blank' href="">Bodygram</a>.</p>
+        <p>Made by <a href="https://greycastle.se" target='_blank'>David</a>.</p>
+      </div>
+    </PageContainer>
 }
 
 function Decoration() {
-  return <div style={{ zIndex: '-100', backgroundImage: 'url(/curve.png)', backgroundSize: 'cover', left: '0', right: '0', bottom: '-120px', mixBlendMode: 'multiply', display: 'block', height: '400px', position: 'absolute' }}></div>
+  return <div style={{ backgroundImage: 'url(/flare.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', position: 'absolute', backgroundPosition: 'top right', zIndex: '-10', left: 0, right: 0, top: 0, bottom: 0 }}></div>
 }

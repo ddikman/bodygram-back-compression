@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../state/auth";
 import { useRouter } from "next/navigation";
+import PageContainer from "../components/pageContainer";
 
 export default function SignIn() {
   const { setEmail } = useContext(AuthContext)
@@ -16,19 +17,20 @@ export default function SignIn() {
     router.push('/home')
   }
 
-  return (<div>
-      <h1>Sign In</h1>
-      <p className="my-4">
-        Note: <br/>
-        This app is just a prototype. Your email acts as a way to identify you but it is in no way secure.
-      </p>
-      <form onSubmit={onSubmit}>
+  return <PageContainer title="Sign In">
+      <form onSubmit={onSubmit} className="flex flex-1 flex-col w-full">
         <label>
           Your email:
         </label>
-        <input className="w-full" type="email" onChange={(e) => setLoginEmail(e.target.value)} />
-        <input className="my-4 w-full" type="submit" value="Continue" />
+        <input className="w-full" type="email" onChange={(e) => setLoginEmail(e.target.value)} value={loginEmail} />
+        <div className="py-4">
+          <p>* The email is only used to separate accounts.</p>
+          <p>* No password is used so anyone can enter any email.</p>
+          <p>* To just see how the UI works, you can use <span class="link" onClick={() => setLoginEmail('test@straighten.app')}>test@straighten.app</span>.</p>
+        </div>
+        <div className="flex flex-1 flex-col justify-end">
+          <input className="w-full" type="submit" value="Continue" />
+        </div>
       </form>
-    </div>
-  )
+    </PageContainer>
 }

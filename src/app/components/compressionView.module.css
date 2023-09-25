@@ -1,11 +1,5 @@
 div.container {
   width: 100%;
   padding: 1rem;
-  border-radius: 0.5rem;
-
-  /* background: #000000;
-  background: -webkit-linear-gradient(to bottom, #434343, #000000);
-  background: linear-gradient(to bottom, #434343, #000000); */
-
-  background: rgba(0, 0, 0, 0.05);
+  mix-blend-mode: difference;
 }

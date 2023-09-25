@@ -9,6 +9,7 @@ import Loader from "../components/loader";
 import Link from "next/link";
 import { AuthContext } from "../state/auth";
 import Measures from "../components/measures";
+import PageContainer from "../components/pageContainer";
 
 export default function Home() {
   const { logout } = useContext(AuthContext);
@@ -26,8 +27,7 @@ export default function Home() {
   }, [api, router])
 
   return <RequireLogin>
-    <div>
-      <h1 class="pageTitle">Your Curve</h1>
+    <PageContainer title="Your Curve">
       { loading && <Loader /> }
       { recentWeek && recentWeek.hasEntries && <div>
           <CompressionView shoulderAngle={recentWeek.shoulder} backHeight={recentWeek.backHeight} hipAngle={recentWeek.hip} title="The past seven days" />
@@ -42,12 +42,14 @@ export default function Home() {
           To get started, add your first scan by clicking the button below.
         </p>
       </div>}
-      { !loading && <div className="flex flex-col gap-4 justify-center mt-4">
+      { !loading && <div className="flex flex-col gap-4 justify-center mt-4 flex-1">
         <button className="w-full" onClick={() => router.push('/add-scan')}>Add scan</button>
-        { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare dates</button> }
-        { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/trend')}>Show trend</button> }
-        <span className="link w-full text-center" onClick={logout}>Logout</span>
+        <div className="w-full flex flex-row gap-2">
+          <button className="w-full secondary" onClick={logout}>Logout</button>
+          { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/compare')}>Compare</button> }
+          { recentWeek.hasEntries && <button className="w-full secondary" onClick={() => router.push('/trend')}>Trend</button> }
+        </div>
       </div>}
-    </div>
+    </PageContainer>
   </RequireLogin>
 }
