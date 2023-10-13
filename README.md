@@ -22,7 +22,7 @@ Before running the app, you will need to add the following settings:
 export API_KEY="Your Bodygram API key"
 ORG_ID="Your Bodygram organisaion key"
 
-NEXT_PUBLIC_SUPABASE_URL="URL to your supabase instnace"
+NEXT_PUBLIC_SUPABASE_URL="URL to your supabase instance"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="The supbabase anonymous key"
 ```
 
